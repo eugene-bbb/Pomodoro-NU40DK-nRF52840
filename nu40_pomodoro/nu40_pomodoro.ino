@@ -45,9 +45,9 @@ State currentState = STATE_IDLE;
 // ── Timer Settings ────────────────────────────────────
 int focusMinutes = 25; // Default focus time (minutes)
 int breakMinutes = 5;  // Default break time (minutes)
-const int MIN_FOCUS = 5;
+const int MIN_FOCUS = 1;
 const int MAX_FOCUS = 60;
-const int MIN_BREAK = 5;
+const int MIN_BREAK = 1;
 const int MAX_BREAK = 30;
 
 // ── Timer Variables ────────────────────────────────────
@@ -142,7 +142,7 @@ void loop()
     lastSW2 = now;
     if (currentState == STATE_IDLE)
     {
-      focusMinutes += 5;
+      focusMinutes += 1;
       if (focusMinutes > MAX_FOCUS)
         focusMinutes = MIN_FOCUS;
       drawIdle();
@@ -176,7 +176,7 @@ void loop()
     lastSW4 = now;
     if (currentState == STATE_IDLE)
     {
-      breakMinutes += 5;
+      breakMinutes += 1;
       if (breakMinutes > MAX_BREAK)
         breakMinutes = MIN_BREAK;
       drawIdle();
