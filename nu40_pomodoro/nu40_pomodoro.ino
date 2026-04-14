@@ -204,7 +204,7 @@ void loop()
       {
         currentState = STATE_DONE;
       }
-      vibrateMotor(10);
+      vibrateMotor(3);
       return;
     }
 
