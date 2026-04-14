@@ -43,8 +43,8 @@ enum State
 State currentState = STATE_IDLE;
 
 // ── Timer Settings ────────────────────────────────────
-int focusMinutes = 25; // Default focus time (minutes)
-int breakMinutes = 5;  // Default break time (minutes)
+int focusMinutes = 55; // Default focus time (minutes)
+int breakMinutes = 25;  // Default break time (minutes)
 const int MIN_FOCUS = 1;
 const int MAX_FOCUS = 60;
 const int MIN_BREAK = 1;
@@ -192,21 +192,19 @@ void loop()
     // Timer end check
     if (remain <= 0)
     {
-      vibrateMotor(10);
       if (currentState == STATE_FOCUS)
       {
         sessionCount++;
-        // Break time start
+        currentState = STATE_BREAK;
         totalSeconds = breakMinutes * 60;
         timerStartMillis = millis();
         pausedElapsed = 0;
-        currentState = STATE_BREAK;
       }
       else
       {
-        // Break time end → Done screen
         currentState = STATE_DONE;
       }
+      vibrateMotor(3);
       return;
     }
 
@@ -259,7 +257,7 @@ void vibrateMotor(int times)
   for (int i = 0; i < times; i++)
   {
     digitalWrite(BUZZER_PIN, HIGH);
-    delay(80);
+    delay(100);
     digitalWrite(BUZZER_PIN, LOW);
     delay(120);
   }
